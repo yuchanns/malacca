@@ -11,7 +11,7 @@ import {
     fallbackMiddleware
 } from '../middlewares';
 
-const BasePath = '/azure-openai/:resource_name/deployments/:deployment_name';
+const BasePath = '/azure-openai/:resource_name/openai/deployments/:deployment_name';
 const ProviderName = 'azure-openai';
 const azureOpenAIRoute = new Hono();
 
@@ -53,7 +53,7 @@ export const azureOpenAIProvider: AIProvider = {
     handleRequest: async (c: Context) => {
         const resourceName = c.req.param('resource_name') || '';
         const deploymentName = c.req.param('deployment_name') || '';
-        const functionName = c.req.path.slice(`/azure-openai/${resourceName}/deployments/${deploymentName}/`.length);
+        const functionName = c.req.path.slice(`/azure-openai/${resourceName}/openai/deployments/${deploymentName}/`.length);
         const azureEndpoint = `https://${resourceName}.openai.azure.com/openai/deployments/${deploymentName}/${functionName}`;
         const queryParams = new URLSearchParams(c.req.query()).toString();
         const urlWithQueryParams = `${azureEndpoint}?${queryParams}`;
