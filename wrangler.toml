@@ -15,11 +15,11 @@ binding = "MALACCA"
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#kv-namespaces
 [[kv_namespaces]]
 binding = "MALACCA_USER"
-id = "172f036565724816a51f04789deeecd0"
+id = "dd245ff5f33b46bf9149352c23ffb0cf"
 
 [[kv_namespaces]]
 binding = "MALACCA_CACHE"
-id = "8ef9a507dca94b21b4f64e40952c0dfd"
+id = "59366a95c68a4a04817a73853cb18fcd"
 
 [observability]
 enabled = true
