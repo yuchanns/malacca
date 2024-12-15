@@ -1,14 +1,11 @@
 import { Hono, Context, Next } from 'hono';
 import { AIProvider } from '../types';
 import {
-    cacheMiddleware,
     metricsMiddleware,
     bufferMiddleware,
     loggingMiddleware,
     virtualKeyMiddleware,
-    rateLimiterMiddleware,
     guardMiddleware,
-    fallbackMiddleware
 } from '../middlewares';
 
 const BasePath = '/azure-openai/:resource_name/openai/deployments/:deployment_name';
@@ -34,10 +31,7 @@ azureOpenAIRoute.use(
     loggingMiddleware,
     bufferMiddleware,
     virtualKeyMiddleware,
-    rateLimiterMiddleware,
     guardMiddleware,
-    cacheMiddleware,
-    fallbackMiddleware
 );
 
 azureOpenAIRoute.post('/*', async (c: Context) => {
