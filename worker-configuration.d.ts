@@ -6,4 +6,5 @@ interface Env {
 	MALACCA: AnalyticsEngineDataset;
 	MY_RATE_LIMITER: RateLimit;
 	AI: Ai;
+	MALACCA_DB: D1Database;
 }

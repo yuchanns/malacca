@@ -21,6 +21,11 @@ id = "dd245ff5f33b46bf9149352c23ffb0cf"
 binding = "MALACCA_CACHE"
 id = "59366a95c68a4a04817a73853cb18fcd"
 
+[[d1_databases]]
+binding = "MALACCA_DB"
+database_name = "mallaca"
+database_id = "8c0ecd67-cfaa-4699-bcdb-adcdf58ac715"
+
 [observability]
 enabled = true
 

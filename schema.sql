@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS MalaccaUser (VirtualKey TEXT PRIMARY KEY, RealKey TEXT);
