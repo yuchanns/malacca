@@ -8,6 +8,7 @@ export { virtualKeyMiddleware } from './virtualKey';
 export { rateLimiterMiddleware } from './rateLimiter';
 export { guardMiddleware } from './guard';
 export { fallbackMiddleware } from './fallback';
+export { preflightMiddleware } from './preflight';
 export interface AppContext {
     Bindings: Env,
     Variables: {
