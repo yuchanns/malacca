@@ -1,4 +1,4 @@
-import { Context, Hono } from 'hono';
+import { Context, Hono } from "hono"
 export interface AIProvider {
     name: string;
     handleRequest: (c: Context) => Promise<Response>;

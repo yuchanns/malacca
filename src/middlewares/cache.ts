@@ -1,34 +1,34 @@
-import { Context, MiddlewareHandler, Next } from "hono";
-import { AppContext, setMiddlewares } from '.';
+import { Context, MiddlewareHandler, Next } from "hono"
+import { AppContext, setMiddlewares } from "."
 
 export async function generateCacheKey(urlWithQueryParams: string, body: string): Promise<string> {
-  const cacheKey = await crypto.subtle.digest(
-    'SHA-256',
-    new TextEncoder().encode(urlWithQueryParams + JSON.stringify(body))
-  );
-  return Array.from(new Uint8Array(cacheKey))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
+	const cacheKey = await crypto.subtle.digest(
+		"SHA-256",
+		new TextEncoder().encode(urlWithQueryParams + JSON.stringify(body))
+	)
+	return Array.from(new Uint8Array(cacheKey))
+		.map(b => b.toString(16).padStart(2, "0"))
+		.join("")
 }
 
-export const cacheMiddleware: MiddlewareHandler = async (c: Context<AppContext>, next: Next) => {
-  setMiddlewares(c, 'cache');
-  const cacheKeyHex = await generateCacheKey(c.req.url, await c.req.text());
-  const response = await c.env.MALACCA_CACHE.get(cacheKeyHex, "stream");
-  if (response) {
-    const { value: _value, metadata } = await c.env.MALACCA_CACHE.getWithMetadata(cacheKeyHex, "stream");
-    const contentType = (metadata as Record<string, string>)['contentType'] || 'application/octet-stream';
-    c.set('malacca-cache-status', 'hit');
-    return new Response(response, { headers: { 'malacca-cache-status': 'hit', 'content-type': contentType } });
-  }
+export const cacheMiddleware: MiddlewareHandler = async (c: Context<AppContext<void>>, next: Next) => {
+	setMiddlewares(c, "cache")
+	const cacheKeyHex = await generateCacheKey(c.req.url, await c.req.text())
+	const response = await c.env.MALACCA_CACHE.get(cacheKeyHex, "stream")
+	if (response) {
+		const { value: _value, metadata } = await c.env.MALACCA_CACHE.getWithMetadata(cacheKeyHex, "stream")
+		const contentType = (metadata as Record<string, string>)["contentType"] || "application/octet-stream"
+		c.set("malacca-cache-status", "hit")
+		return new Response(response, { headers: { "malacca-cache-status": "hit", "content-type": contentType } })
+	}
 
-  await next();
+	await next()
 
-  if (c.res.status === 200) {
-    c.executionCtx.waitUntil((async () => {
-      await c.get('bufferPromise');
-      const contentType = c.res.headers.get('content-type');
-      c.executionCtx.waitUntil(c.env.MALACCA_CACHE.put(cacheKeyHex, c.get('buffer'), { expirationTtl: 3600, metadata: { 'contentType': contentType } }));
-    })());
-  }
-};
+	if (c.res.status === 200) {
+		c.executionCtx.waitUntil((async () => {
+			await c.get("bufferPromise")
+			const contentType = c.res.headers.get("content-type")
+			c.executionCtx.waitUntil(c.env.MALACCA_CACHE.put(cacheKeyHex, c.get("buffer"), { expirationTtl: 3600, metadata: { "contentType": contentType } }))
+		})())
+	}
+}
