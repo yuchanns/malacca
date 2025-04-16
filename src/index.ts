@@ -9,6 +9,9 @@ Object.entries(providers).forEach(([_, provider]) => {
 	app.route(provider.basePath, provider.route)
 })
 
-app.onError((err, c) => c.text(err.message, 500))
+app.onError((err, c) => {
+	console.error(err)
+	return c.text(err.message, 500)
+})
 
 export default app
