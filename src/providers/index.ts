@@ -4,6 +4,7 @@ import { workersAIProvider } from "./workersAI"
 import { deepseekProvider } from "./deepseek"
 import { openaiProvider } from "./openai"
 import { azureAIProvider } from "./azureAI"
+import { groqProvider } from "./grop"
 export const providers = {
 	"azure-openai": azureOpenAIProvider,
 	"workers-ai": workersAIProvider,
@@ -11,4 +12,5 @@ export const providers = {
 	"openai": openaiProvider,
 	"azure-deepseek": azureDeepseekProvider,
 	"azure-ai": azureAIProvider,
+	"groq": groqProvider,
 }
