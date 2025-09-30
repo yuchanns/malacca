@@ -14,10 +14,10 @@ It is written in **TypeScript**: ensuring adaptability to the rapidly evolving A
 
 - 🌍 **Global Scale, Zero Maintenance**
   - Built on Cloudflare Workers, Malacca offers seamless global deployment without the need to manage servers.
-  
+
 - 🧩 **High Flexibility and Extensibility**
   - Written in TypeScript, which provides excellent readability and allows easy customization and expansion of features.
-  
+
 - 🛠️ **Comprehensive Feature Set**
   - 🔑 **Virtual Key**: Manage access permissions using virtual keys, providing more granular control over API access.
   - ⚡ **Caching**: Reduce latency and costs by caching repeat requests.
@@ -40,7 +40,7 @@ It is written in **TypeScript**: ensuring adaptability to the rapidly evolving A
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/oilbeater/malacca.git
+   git clone https://github.com/yuchanns/malacca.git
    cd malacca
    ```
 
@@ -53,7 +53,7 @@ It is written in **TypeScript**: ensuring adaptability to the rapidly evolving A
 3. **Configure the Project**
 
    Create KV Namespace for LLM Cache and Virtual Key
-   
+
    ```bash
    npx wrangler kv namespace create MALACCA_CACHE
    npx wrangler kv namespace create MALACCA_USER
@@ -73,7 +73,7 @@ It is written in **TypeScript**: ensuring adaptability to the rapidly evolving A
 
 - [OpenAI](./docs/openai.md)
 - [Azure OpenAI](./docs/azure_openai.md)
-- [DeepSeek](./docs/deepseek.md) 
+- [DeepSeek](./docs/deepseek.md)
 
 ### How to use?
 
